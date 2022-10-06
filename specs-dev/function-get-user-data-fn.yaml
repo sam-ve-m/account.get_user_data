@@ -1,0 +1,55 @@
+include:
+- ./func/*
+kind: ArchiveUploadSpec
+name: func-qb1s
+
+---
+apiVersion: fission.io/v1
+kind: Package
+metadata:
+  creationTimestamp: null
+  name: get-user-data-fn-03e03eac-ab1a-4e1f-9b0c-ab40a4ae826e
+  namespace: default
+spec:
+  deployment:
+    checksum: {}
+  environment:
+    name: get-user-data-env
+    namespace: default
+  source:
+    checksum: {}
+    type: url
+    url: archive://func-qb1s
+status:
+  buildstatus: pending
+  lastUpdateTimestamp: "2022-10-04T12:40:18Z"
+
+---
+apiVersion: fission.io/v1
+kind: Function
+metadata:
+  creationTimestamp: null
+  name: get-user-data-fn
+  namespace: default
+spec:
+  InvokeStrategy:
+    ExecutionStrategy:
+      ExecutorType: newdeploy
+      MaxScale: 1
+      MinScale: 1
+      SpecializationTimeout: 120
+      TargetCPUPercent: 0
+    StrategyType: execution
+  concurrency: 500
+  environment:
+    name: get-user-data-env
+    namespace: default
+  functionTimeout: 60
+  idletimeout: 120
+  package:
+    functionName: main.get_user_data
+    packageref:
+      name: get-user-data-fn-03e03eac-ab1a-4e1f-9b0c-ab40a4ae826e
+      namespace: default
+  requestsPerPod: 1
+  resources: {}
