@@ -35,8 +35,8 @@ spec:
   InvokeStrategy:
     ExecutionStrategy:
       ExecutorType: newdeploy
-      MaxScale: 1
-      MinScale: 3
+      MaxScale: 3
+      MinScale: 1
       SpecializationTimeout: 120
       TargetCPUPercent: 80
     StrategyType: execution
@@ -51,5 +51,5 @@ spec:
     packageref:
       name: get-user-data-fn-03e03eac-ab1a-4e1f-9b0c-ab40a4ae826e
       namespace: default
-  requestsPerPod: 1
+  requestsPerPod: 10000
   resources: {}
