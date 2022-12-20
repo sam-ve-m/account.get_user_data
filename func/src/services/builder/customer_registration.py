@@ -135,15 +135,6 @@ class CustomerRegistrationBuilder:
         self.__buffer["documents"].update({"identity_number": identity_number})
         return self
 
-    def documents_expedition_date(self):
-        expedition_date = (
-            self.__user_data.get("identifier_document", {})
-            .get("document_data", {})
-            .get("date")
-        )
-        self.__buffer["documents"].update({"expedition_date": expedition_date})
-        return self
-
     def documents_issuer(self):
         issuer = (
             self.__user_data.get("identifier_document", {})
@@ -358,7 +349,6 @@ class CustomerRegistrationBuilder:
             .documents_cpf()
             .documents_identity_type()
             .documents_identity_number()
-            .documents_expedition_date()
             .documents_issuer()
             .documents_state()
             .address_country()
