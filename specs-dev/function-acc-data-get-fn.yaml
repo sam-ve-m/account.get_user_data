@@ -1,35 +1,35 @@
 include:
-- ./func/*
+- fission.py
 kind: ArchiveUploadSpec
-name: func-qb1s
+name: fission-py-BPfw
 
 ---
 apiVersion: fission.io/v1
 kind: Package
 metadata:
   creationTimestamp: null
-  name: get-user-data-fn-03e03eac-ab1a-4e1f-9b0c-ab40a4ae826e
+  name: acc-data-get-fn-fca7d414-49ad-442f-8645-1b78f9e1c604
   namespace: default
 spec:
   deployment:
     checksum: {}
+    type: url
+    url: archive://fission-py-BPfw
   environment:
-    name: get-user-data-env
+    name: acc-data-get-env
     namespace: default
   source:
     checksum: {}
-    type: url
-    url: archive://func-qb1s
 status:
-  buildstatus: pending
-  lastUpdateTimestamp: "2022-10-04T12:40:18Z"
+  buildstatus: none
+  lastUpdateTimestamp: "2023-01-06T15:38:44Z"
 
 ---
 apiVersion: fission.io/v1
 kind: Function
 metadata:
   creationTimestamp: null
-  name: get-user-data-fn
+  name: acc-data-get-fn
   namespace: default
 spec:
   InvokeStrategy:
@@ -38,18 +38,24 @@ spec:
       MaxScale: 3
       MinScale: 1
       SpecializationTimeout: 120
-      TargetCPUPercent: 80
+      TargetCPUPercent: 0
+      hpaMetrics:
+      - resource:
+          name: cpu
+          target:
+            averageUtilization: 80
+            type: Utilization
+        type: Resource
     StrategyType: execution
   concurrency: 500
   environment:
-    name: get-user-data-env
+    name: acc-data-get-env
     namespace: default
   functionTimeout: 60
   idletimeout: 120
   package:
-    functionName: main.get_user_data
     packageref:
-      name: get-user-data-fn-03e03eac-ab1a-4e1f-9b0c-ab40a4ae826e
+      name: acc-data-get-fn-fca7d414-49ad-442f-8645-1b78f9e1c604
       namespace: default
-  requestsPerPod: 1
+  requestsPerPod: 10000
   resources: {}

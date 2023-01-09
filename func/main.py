@@ -1,12 +1,12 @@
-from src.domain.response.model import ResponseModel
-from src.domain.enums.code import InternalCode
-from src.domain.exceptions.exceptions import (
+from func.src.domain.response.model import ResponseModel
+from func.src.domain.enums.code import InternalCode
+from func.src.domain.exceptions.exceptions import (
     ErrorOnDecodeJwt,
     UserUniqueIdNotExists,
     ErrorOnGetUniqueId,
 )
-from src.services.jwt import JwtService
-from src.services.user_review import UserDataService
+from func.src.services.jwt import JwtService
+from func.src.services.user_review import UserDataService
 
 from http import HTTPStatus
 

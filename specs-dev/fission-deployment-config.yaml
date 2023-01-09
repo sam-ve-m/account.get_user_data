@@ -3,5 +3,5 @@
 # Do not edit the UID below: that will break 'fission spec apply'
 apiVersion: fission.io/v1
 kind: DeploymentConfig
-name: onboarding-get-user-data
-uid: c71c9ee0-fd00-4ba3-a4a5-0937fbda5942
+name: account-get-user-data
+uid: 96ca8055-cda2-43c2-b95f-2a3452d4ff00
